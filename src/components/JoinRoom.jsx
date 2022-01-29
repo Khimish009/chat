@@ -7,14 +7,18 @@ const JoinRoom = ({onLogin}) => {
     const disabledButton = useMemo(() => roomId === '' || userName === '', [roomId, userName]);
 
     const send = () => {
-        api.sendRoomData({roomId, userName})
-            .then(onLogin)
+        const roomData = {roomId, userName};
+
+        api.sendRoomData(roomData)
+            .then(() => {
+                onLogin(roomData);
+                setRoomId('');
+                setUserName('');
+            })
             .catch((err) => {
                 console.log('Error', err)
             });
-        setRoomId('');
-        setUserName('');
-    }
+    };
 
     return (
         <div className="join-block">
