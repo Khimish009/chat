@@ -20,7 +20,13 @@ app.get('/rooms', (req, res) => {
 
 app.post('/rooms', (req, res) => {
     const {roomId, userName} = req.body;
-    console.log(roomId, userName)
+
+    if (rooms.has(roomId)) {
+        rooms.set(roomId, new Map([
+            [users, new Map()],
+            [messages, []]
+        ]))
+    }
     res.send();
 });
 

@@ -12,16 +12,11 @@ html, body, #root {
   margin: 0;
 }
 
-#root {
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.wrapper {
-  max-width: 40%;
-  margin: 100px auto;
-  min-width: 720px;
+  height: 100%;
 }
 
 .join-block {
