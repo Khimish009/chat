@@ -1,4 +1,5 @@
-const app = require("express")();
+const express = require("express")
+const app = express();
 const cors = require('cors');
 const server = require("http").createServer(app);
 const io = require('socket.io')(server, {
@@ -9,15 +10,22 @@ const io = require('socket.io')(server, {
   });
 
 app.use(cors());
+app.use(express.json());
 
 const rooms = new Map();
 
-app.get('/users', (req, res) => {
+app.get('/rooms', (req, res) => {
     res.send('Send');
 });
 
+app.post('/rooms', (req, res) => {
+    const {roomId, userName} = req.body;
+    console.log(roomId, userName)
+    res.send();
+});
+
 io.on('connection', socket => {
-    console.log('User connected', socket);
+    console.log('User connected', socket.id);
 });
 
 server.listen(9999, (error) => {
